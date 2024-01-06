@@ -5,6 +5,7 @@ import Slider from "./carousel.component";
 
 const Recommended = () => {
   const { state } = useContext(DataContext);
+  //   console.log(state?.data);
   return (
     <section className="pb-10">
       <div className="container mx-auto px-3">

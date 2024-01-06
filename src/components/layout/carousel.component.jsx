@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import AddItemFormModal from "./addItemModal.layout.component";
 
 const Slider = ({ children, category = "" }) => {
+  const [showModal, setShowModal] = useState(false);
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -33,7 +37,12 @@ const Slider = ({ children, category = "" }) => {
         className="mb-4  gap-3 flex justify-end 
             items-center w-full"
       >
-        <span className="text-sm text-[#FA7734] cursor-pointer">AddMore</span>
+        <span
+          className="text-sm text-[#FA7734] cursor-pointer"
+          onClick={() => setShowModal(true)}
+        >
+          AddMore
+        </span>
         <div className="flex gap-1 items-center">
           <button
             className={`text-lg text-slate-700 ${
@@ -52,18 +61,23 @@ const Slider = ({ children, category = "" }) => {
   };
 
   return (
-    <div className="mx-auto relative flex flex-col-reverse">
-      <Carousel
-        swipeable={true}
-        itemClass="pr-4"
-        responsive={responsive}
-        arrows={false}
-        renderButtonGroupOutside={true}
-        customButtonGroup={<ButtonGroup />}
-      >
-        {children}
-      </Carousel>
-    </div>
+    <>
+      <div className="mx-auto relative flex flex-col-reverse">
+        <Carousel
+          swipeable={true}
+          itemClass="pr-4"
+          responsive={responsive}
+          arrows={false}
+          renderButtonGroupOutside={true}
+          customButtonGroup={<ButtonGroup />}
+        >
+          {children}
+        </Carousel>
+      </div>
+      {showModal && (
+        <AddItemFormModal setShowModal={setShowModal} category={category} />
+      )}
+    </>
   );
 };
 

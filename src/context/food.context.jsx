@@ -28,7 +28,13 @@ const dataReducer = (state, action) => {
     case actionTypes.SET_IS_ERROR:
       return { ...state, isError: action.payload };
     case actionTypes.SET_DATA:
-      return { ...state, data: action.payload };
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+        isError: false,
+        error: "",
+      };
     case actionTypes.ADD_DATA:
       return { ...state, data: [...state.data, action.payload] }; // Add new data
     default:
